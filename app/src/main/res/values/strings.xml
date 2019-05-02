@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Projet 3-GAMBA</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_connexion" translatable="false">  Se connecter</string>
+    <string name="menu_list" translatable="false"> Liste des visites</string>
+    <string name="menu_import" translatable="false"> Importer les données</string>
+    <string name="menu_export"> Exporter les données</string>
+    <string name="menu_deconnexion" translatable="false"> Se déconnecter</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="strLogin">Login :</string>
+    <string name="strPassword">Password :</string>
+    <string name="strIdentifiant">Identifiant</string>
+    <string name="strPasswordHint">Password</string>
+    <string name="title_activity_act_import">ActImport</string>
+    <string name="title_activity_basicmap">basicmap</string>
+
+
+</resources>
