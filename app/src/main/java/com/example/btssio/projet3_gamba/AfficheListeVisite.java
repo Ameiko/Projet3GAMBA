@@ -26,7 +26,6 @@ public class AfficheListeVisite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affiche_liste_visite);
 
-
         vmodele=new Modele();
         listeVisite = vmodele.listeVisite();
 

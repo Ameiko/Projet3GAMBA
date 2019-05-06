@@ -60,6 +60,8 @@ import java.lang.Object;
 import android.content.Context;
 
 import android.preference.PreferenceManager;
+import android.widget.Toast;
+
 import     java.io.File;
 import org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants;
 
@@ -90,20 +92,21 @@ public class Map extends AppCompatActivity implements LocationListener {
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
         setContentView(R.layout.activity_basicmap);
-        myOpenMapView = (MapView) findViewById(R.id.map);
+        myOpenMapView = (MapView) findViewById(R.id.Map);
         myOpenMapView.setTileSource(TileSourceFactory.MAPNIK);
         myOpenMapView.setMultiTouchControls(true);
         mapController = myOpenMapView.getController();
         Bundle b = getIntent().getExtras();
         adresseClient = b.getString("param1");
-        Log.d("map", "adresse " + adresseClient);
         recupPositionClient();
         if (!reussiGeolocalisationClient) {
             try {
+                Toast.makeText(getApplicationContext(), "Affiche Map", Toast.LENGTH_LONG).show();
                 adresseClient = URLEncoder.encode(adresseClient, "UTF-8");
-                // FatalError
 
-            } catch (java.io.UnsupportedEncodingException e1) {
+
+            } catch (Exception e1) {
+                Log.d("TRY CATCH MAP", e1.getMessage());
             }
             String vurl = "http://maps.google.com/maps/api/geocode/json?address=" + adresseClient + ",france&sensor=false";
             String[] mesparams = {vurl};
@@ -127,7 +130,7 @@ public class Map extends AppCompatActivity implements LocationListener {
     }
     public void affiche()
     {
-        myOpenMapView.setUseDataConnection(false);
+        myOpenMapView.setUseDataConnection(true);
         if (reussiGeolocalisationClient) {
 
         //    Drawable icon = getResources().getDrawable(R.drawable.logo2);
@@ -138,25 +141,25 @@ public class Map extends AppCompatActivity implements LocationListener {
             changeminmax(g);
             marker.setPosition(g);
             Log.d("map", "posiclientok- " + String.valueOf(positionClient_latt) + "/" + String.valueOf(positionClient_long));
-        //    marker.setIcon(icon);
+     //       marker.setIcon(icon);
             myOpenMapView.getOverlays().add(marker);
         }
         if (reussiGeolocalisationAgent) {
 
-        //    Drawable icon = getResources().getDrawable(R.drawable.pointer);
+    //        Drawable icon = getResources().getDrawable(R.drawable.pointer);
             Marker marker = new Marker(myOpenMapView);
             marker.setTitle("Vous");
             GeoPoint g=new GeoPoint(positionAgent_latt, positionAgent_long);
             marker.setPosition(g);
             changeminmax(g);
             Log.d("map", "posiAgentok- " + String.valueOf(positionAgent_latt) + "/" + String.valueOf(positionAgent_long));
-          //  marker.setIcon(icon);
+   //         marker.setIcon(icon);
             myOpenMapView.getOverlays().add(marker);
         }
         Log.d("map", "min max- " + String.valueOf(minLat) + "-" + String.valueOf(maxLat)+ String.valueOf(minLong) + "-" + String.valueOf(maxLong));
-        BoundingBox boundingBox = new BoundingBox(maxLat, maxLong, minLat, minLong);
+//        BoundingBox boundingBox = new BoundingBox(maxLat, maxLong, minLat, minLong);
 
-        mapController.setCenter(boundingBox.getCenterWithDateLine());
+  //      mapController.setCenter(boundingBox.getCenterWithDateLine());
         mapController.setZoom(18.0);
     }
     public void changeminmax(GeoPoint point)

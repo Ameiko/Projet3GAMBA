@@ -41,7 +41,7 @@ public class AfficheVisite extends AppCompatActivity {
 
 
         final Visite laVisite = vmodel.trouveVisite(idVisite);
-        Patient lePatient = vmodel.trouvePatient(laVisite.getPatient());
+        final Patient lePatient = vmodel.trouvePatient(laVisite.getPatient());
 
         String NomP = lePatient.getNom();
         String PrenomP = lePatient.getPrenom();
@@ -133,6 +133,7 @@ public class AfficheVisite extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Clic sur Map", Toast.LENGTH_LONG).show();
                          Intent AfficheMap = new Intent(AfficheVisite.this, com.example.btssio.projet3_gamba.Map.class);
                          AfficheMap.putExtra("idVisite", laVisite.getId());
+                         AfficheMap.putExtra("param1", lePatient.getAd1());
 
                          startActivity(AfficheMap);
 
